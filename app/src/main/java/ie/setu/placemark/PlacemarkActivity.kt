@@ -1,6 +1,7 @@
 package ie.setu.placemark
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,7 +23,13 @@ class PlacemarkActivity : AppCompatActivity() {
         i("Placemark activity started")
 
         binding.btnAdd.setOnClickListener(){
-            i("add button pressed")
+            val placemarkTitle = binding.placemarkTitle.text.toString()
+            if (placemarkTitle.isNotEmpty()){
+                i("add button pressed: $placemarkTitle")
+            }
+            else{
+                Toast.makeText(applicationContext, "Please Enter a Title", Toast.LENGTH_LONG).show()
+            }
         }
 
 
