@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#80FFCC</color>
+    <color name="colorOnPrimary">#FF000000</color>
+
+    <color name="appBackground">#0A0A0A</color>
+    <color name="appText">#FFFFFF</color>
+    <color name="appHint">#A0A0A0</color>
 </resources>
