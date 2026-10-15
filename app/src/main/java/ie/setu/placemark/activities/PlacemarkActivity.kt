@@ -22,8 +22,10 @@ class PlacemarkActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener{
             placemark.title = binding.placemarkTitle.text.toString()
-            if (placemark.title.isNotEmpty()){
+            placemark.description = binding.placemarkDescription.text.toString()
+            if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()){
                 Timber.i("add button pressed: $placemark.title")
+                Timber.i("add button pressed: $placemark.description")
             }
             else{
                 Toast.makeText(applicationContext, "Please Enter a Title", Toast.LENGTH_LONG).show()

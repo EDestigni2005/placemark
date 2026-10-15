@@ -56,10 +56,26 @@
                     android:textColorHint="@color/appHint"
                     android:textSize="16sp" />
 
+                <EditText
+                    android:id="@+id/placemarkDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_margin="8dp"
+                    android:autofillHints="hint"
+                    android:hint="@string/hint_placemarkDesc"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:maxLines="3"
+                    android:padding="8dp"
+                    android:textColor="@color/appText"
+                    android:textColorHint="@color/appHint"
+                    android:textSize="16sp" />
+
+
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="61dp"
                     android:layout_margin="16dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:padding="8dp"
