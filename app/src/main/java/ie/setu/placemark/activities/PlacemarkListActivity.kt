@@ -14,6 +14,7 @@ import ie.setu.placemark.databinding.ActivityPlacemarkListBinding
 import ie.setu.placemark.databinding.CardPlacemarkBinding
 import ie.setu.placemark.main.MainApp
 import ie.setu.placemark.models.PlacemarkModel
+import android.view.Menu
 
 class PlacemarkListActivity : AppCompatActivity() {
 
@@ -24,16 +25,25 @@ class PlacemarkListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlacemarkListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.toolbar.title = title
+        setSupportActionBar(binding.toolbar)
 
         app = application as MainApp
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = PlacemarkAdapter(app.placemarks)
-        }
+
     }
 
-class PlacemarkAdapter constructor(private var placemarks: List<PlacemarkModel>) : RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean{
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+}
+
+
+class PlacemarkAdapter (private var placemarks: List<PlacemarkModel>) : RecyclerView.Adapter<PlacemarkAdapter.MainHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : MainHolder {
         val binding = CardPlacemarkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
