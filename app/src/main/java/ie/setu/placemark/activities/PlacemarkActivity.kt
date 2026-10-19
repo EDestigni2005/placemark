@@ -25,12 +25,15 @@ class PlacemarkActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener{
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.placemarkDescription.text.toString()
+
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()){
                 app.placemarks.add(placemark.copy())
                 i("add button pressed: $placemark")
                 for (i in app.placemarks.indices){
                     i("Placemark[$i}:${this.app.placemarks[i]}")
                 }
+                setResult(RESULT_OK)
+                finish()
             }
             else{
                 Toast.makeText(applicationContext, "Please Enter a Title", Toast.LENGTH_LONG).show()
