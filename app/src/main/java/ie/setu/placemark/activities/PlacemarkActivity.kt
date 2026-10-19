@@ -4,34 +4,60 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ie.setu.placemark.databinding.ActivityPlacemarkBinding
+import ie.setu.placemark.main.MainApp
 import ie.setu.placemark.models.PlacemarkModel
 import timber.log.Timber
+import timber.log.Timber.i
+import android.view.Menu
+import android.view.MenuItem
+import ie.setu.placemark.R
 
 class PlacemarkActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlacemarkBinding
     var placemark = PlacemarkModel()
+    lateinit var app : MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityPlacemarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarAdd)
 
-        Timber.plant(Timber.DebugTree())
-        Timber.i("Placemark activity started")
+        app = application as MainApp
+        i("Placemark activity started")
 
         binding.btnAdd.setOnClickListener{
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.placemarkDescription.text.toString()
+
             if (placemark.title.isNotEmpty() && placemark.description.isNotEmpty()){
-                Timber.i("add button pressed: $placemark.title")
-                Timber.i("add button pressed: $placemark.description")
+                app.placemarks.add(placemark.copy())
+                i("add button pressed: $placemark")
+                for (i in app.placemarks.indices){
+                    i("Placemark[$i}:${this.app.placemarks[i]}")
+                }
+                setResult(RESULT_OK)
+                finish()
             }
             else{
                 Toast.makeText(applicationContext, "Please Enter a Title", Toast.LENGTH_LONG).show()
             }
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_placemark, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                setResult(RESULT_CANCELED)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
