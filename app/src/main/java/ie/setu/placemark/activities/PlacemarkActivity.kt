@@ -8,6 +8,9 @@ import ie.setu.placemark.main.MainApp
 import ie.setu.placemark.models.PlacemarkModel
 import timber.log.Timber
 import timber.log.Timber.i
+import android.view.Menu
+import android.view.MenuItem
+import ie.setu.placemark.R
 
 class PlacemarkActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlacemarkBinding
@@ -18,6 +21,7 @@ class PlacemarkActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlacemarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
         i("Placemark activity started")
@@ -39,7 +43,21 @@ class PlacemarkActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Please Enter a Title", Toast.LENGTH_LONG).show()
             }
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_placemark, menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                setResult(RESULT_CANCELED)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
